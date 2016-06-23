@@ -57,8 +57,6 @@ public abstract class Piece implements Serializable {
 		board.put(loc, this);
 	}
 
-	public abstract Piece clone(Board b);
-
 	protected void getInline(List<Vector> ret, Vector currLoc, List<Vector> inWay, double direction) {
 		while (!inWay.contains(currLoc) && getBoard().isValid(currLoc)) {
 			ret.add(currLoc);

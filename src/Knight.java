@@ -33,9 +33,8 @@ public class Knight extends Piece {
 			return "n";
 	}
 
-	@Override
-	public Piece clone(Board b) {
-		return new Knight(this.getColor(),b);
-	}
+    public Piece clone(Board board){
+        return new Knight(getColor(),board).setLoc(new Vector(getLoc().getX(),getLoc().getY()));
+    }
 
 }

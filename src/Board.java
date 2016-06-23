@@ -22,7 +22,7 @@ public class Board{
     for(int r = 0; r < 8; r++) {
       for(int c = 0; c < 8; c++) {
         if(b.board[r][c] !=null)
-          add(board[r][c].clone(this));
+          add(b.board[r][c].clone(this));
       }
     }
   }

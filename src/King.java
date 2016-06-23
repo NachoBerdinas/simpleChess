@@ -28,8 +28,7 @@ public class King extends Piece {
 	public Piece clone(Board b) {
 		if (getColor() == Color.WHITE) {
 			b.setWhiteKing(this);
-		}
-		else {
+		} else {
 			b.setBlackKing(this);
 		}
 		return new King(this.getColor(),b);

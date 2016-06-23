@@ -35,9 +35,9 @@ public class Bishop extends Piece {
 			return "b";
 	}
 
-	@Override
-	public Piece clone(Board b) {
-		return new Bishop(this.getColor(), b);
+	public Piece clone(Board board){
+		return new Bishop(getColor(),board).setLoc(new Vector(getLoc().getX(),getLoc().getY()));
 	}
+
 
 }
