@@ -13,16 +13,16 @@ public class Knight extends Piece {
 		for(int x : dx) {
 			for(int y : dy) {
 				if(Math.abs(x) + Math.abs(y) == 3) {
-					Vector testLoc = new Vector(getLoc().getY()+y, getLoc().getX()+x);
+					Vector testLoc = new Vector(getLoc().getX()+y, getLoc().getY()+x);
 					if(getBoard().isValid(testLoc)) {
 						Piece testPiece = getBoard().get(testLoc);
-						// if empty cell or piece of other color (for attack)
 						if(testPiece == null || testPiece.getColor() != getColor())
 							ret.add(testLoc);
 					}
 				}
 			}
 		}
+		ret.stream().forEach(System.out::println);
 		return ret;
 	}
 

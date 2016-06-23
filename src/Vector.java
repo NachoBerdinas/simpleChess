@@ -24,7 +24,7 @@ public class Vector {
 	}
 
 	public String toString() {
-		return "(" + y + "," + x + ")";
+		return "(" + (char)(y+65) + "," + x + ")";
 	}
 
 	public static final double NORTH = Math.PI/2;

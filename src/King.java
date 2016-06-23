@@ -9,7 +9,7 @@ public class King extends Piece {
 		List<Vector> ret = new ArrayList<>();
 		for(int r = -1; r <= 1; r++) {
 			for(int c = -1; c <= 1; c++) {
-				Vector testLoc = new Vector(getLoc().getY()+r,getLoc().getX()+c);
+				Vector testLoc = new Vector(getLoc().getX()+r,getLoc().getY()+c);
 				if(getBoard().isValid(testLoc)) {
 					Piece testPiece = getBoard().get(testLoc);
 					if(!testLoc.equals(getLoc()) && (testPiece == null || testPiece.getColor() != getColor()))
