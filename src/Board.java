@@ -54,17 +54,15 @@ public class Board{
   }
 
     private void generatePieces() {
-        //Generate Pawns
         for(int c = 0; c < 8; c++) {
             add(new Pawn(Color.BLACK, this).setLoc(new Vector(1,c)));
             add(new Pawn(Color.WHITE, this).setLoc(new Vector(6,c)));
         }
-        //Add Kings
         whiteKing = new King(Color.WHITE, this).setLoc(new Vector(7,4));
         blackKing = new King(Color.BLACK, this).setLoc(new Vector(0,4));
         add(whiteKing);
         add(blackKing);
-        //Add rest of superior pieces
+
         add(new Rook(Color.BLACK, this).setLoc(new Vector(0,0)));
         add(new Rook(Color.BLACK, this).setLoc(new Vector(0,7)));
         add(new Knight(Color.BLACK, this).setLoc(new Vector(0,1)));
@@ -228,7 +226,7 @@ public class Board{
                 move = board.parseMove(rawMove, board.whosTurn());
             }catch(NumberFormatException e) {
                 System.out.println(e.getMessage());
-                System.out.println("Please try again using notation \"e2 to e4\"");
+                System.out.println("Please try again using notation \"A4 - A2\"");
             }catch(IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 System.out.println("Please try again with a legal move");
