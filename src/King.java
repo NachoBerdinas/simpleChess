@@ -29,11 +29,10 @@ public class King extends Piece {
 		King aux = this;
 		if (getColor() == Color.WHITE) {
 			b.setWhiteKing(aux);
-		}
-		else {
+		} else {
 			b.setBlackKing(aux);
 		}
-		return new King(aux.getColor(),b);
+		return new King(aux.getColor(),b).setLoc(new Vector(getLoc().getX(),getLoc().getY()));
 	}
 
 	public String toString() { 
