@@ -229,6 +229,7 @@ public class Board implements Serializable{
                 obj.writeObject(board);
                 obj.close();
                 System.out.println("Game saved succesfully");
+                continue;
             }
             if (rawMove.equals("open")) {
                 FileInputStream recover = new FileInputStream("ChessData");
@@ -236,7 +237,9 @@ public class Board implements Serializable{
                 board = (Board) p.readObject();
                 p.close();
                 System.out.println("Game succesfully recovered");
+                continue;
             }
+
             try {
                 move = board.parseMove(rawMove, board.whosTurn());
             }catch(NumberFormatException e) {
