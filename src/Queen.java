@@ -45,4 +45,9 @@ public class Queen extends Piece {
 
 	}
 
+
+	public Piece clone(Board board){
+		return new Queen(getColor(),board).setLoc(new Vector(getLoc().getX(),getLoc().getY()));
+	}
+
 }

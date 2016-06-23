@@ -36,5 +36,9 @@ public class Rook extends Piece {
     else
       return "r";
   }
+
+  public Piece clone(Board board){
+    return new Rook(getColor(),board).setLoc(new Vector(getLoc().getX(),getLoc().getY()));
+  }
   
 }

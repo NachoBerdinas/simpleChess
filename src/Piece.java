@@ -66,4 +66,6 @@ public abstract class Piece implements Serializable {
 		}
 	}
 
+	public abstract Piece clone(Board board);
+
 }

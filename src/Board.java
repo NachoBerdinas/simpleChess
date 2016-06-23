@@ -21,26 +21,8 @@ public class Board{
     blackPieces = new ArrayList<Piece>();
     for(int r = 0; r < 8; r++) {
       for(int c = 0; c < 8; c++) {
-        if(b.board[r][c] instanceof Pawn)
-          add(new Pawn(b.board[r][c].getColor(), this).setLoc(new Vector(r,c)));
-        if(b.board[r][c] instanceof Knight)
-          add(new Knight(b.board[r][c].getColor(), this).setLoc(new Vector(r,c)));
-        if(b.board[r][c] instanceof Rook)
-          add(new Rook(b.board[r][c].getColor(), this).setLoc(new Vector(r,c)));
-        if(b.board[r][c] instanceof Bishop)
-          add(new Bishop(b.board[r][c].getColor(), this).setLoc(new Vector(r,c)));
-        if(b.board[r][c] instanceof Queen)
-          add(new Queen(b.board[r][c].getColor(), this).setLoc(new Vector(r,c)));
-        if(b.board[r][c] instanceof King){
-          Piece king = new King(b.board[r][c].getColor(), this).setLoc(new Vector(r,c));
-          add(king);
-          if(b.board[r][c].getColor().equals(Color.WHITE)){
-            setWhiteKing(king);
-          }else{
-            setBlackKing(king);
-          }
-        }
-
+        if(b.board[r][c] !=null)
+          add(board[r][c].clone(this));
       }
     }
   }
