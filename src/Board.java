@@ -221,9 +221,9 @@ public class Board implements Serializable{
         do {
             board.printBoard();
             System.out.println(board.whosTurn() + " to move:");
-            System.out.println("You can type save or open at anytime to save/recover game file");
+            System.out.println("You can type SAVE or LOAD at anytime to save/recover game file");
             String rawMove = kb.nextLine();
-            if (rawMove.equals("save")) {
+            if (rawMove.toLowerCase().equals("save")) {
                 FileOutputStream exit = new FileOutputStream("ChessData");
                 ObjectOutputStream obj = new ObjectOutputStream(exit);
                 obj.writeObject(board);
@@ -231,7 +231,7 @@ public class Board implements Serializable{
                 System.out.println("Game saved succesfully");
                 continue;
             }
-            if (rawMove.equals("open")) {
+            if (rawMove.toLowerCase().equals("load")) {
                 FileInputStream recover = new FileInputStream("ChessData");
                 ObjectInputStream p = new ObjectInputStream(recover);
                 board = (Board) p.readObject();
