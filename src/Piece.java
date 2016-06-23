@@ -41,7 +41,6 @@ public abstract class Piece implements Serializable {
 		moves.stream().forEach(System.out::println);
 
 		Vector initLoc = position;
-
 		Board testBoard = new Board(board);
 		Piece testPiece = testBoard.get(position);
 		testBoard.put(initLoc,null);

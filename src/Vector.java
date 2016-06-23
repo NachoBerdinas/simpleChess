@@ -39,7 +39,7 @@ public class Vector {
 	public Vector getAdjacentLocation(double dir) {
 		int dx = (int) Math.round(Math.cos(dir));
 		int dy = (int) (-1*Math.round(Math.sin(dir)));
-		return new Vector(y +dy, x +dx);
+		return new Vector(x +dy,y +dx);
 	}
 
 }

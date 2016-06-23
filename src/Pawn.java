@@ -12,6 +12,7 @@ public class Pawn extends Piece {
 	public List<Vector> getPossibleMoves() {
 		Board b = getBoard();
 		List<Vector> ret = new ArrayList<>();
+		System.out.println(getLoc().toString());
 		Vector front = getLoc().getAdjacentLocation(Vector.NORTH);
 		Vector attLeft = getLoc().getAdjacentLocation(Vector.NORTHWEST);
 		Vector attRight = getLoc().getAdjacentLocation(Vector.NORTHEAST);
@@ -33,6 +34,7 @@ public class Pawn extends Piece {
 			System.out.println("Sarasa 4");
 			ret.add(attRight);
 		}
+		System.out.println("Returning possible moves "+ret.size());
 
 		return ret;
 	}
