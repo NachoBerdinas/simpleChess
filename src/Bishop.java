@@ -26,11 +26,18 @@ public class Bishop extends Piece {
 		return ret;
 	}
 
+
+
 	public String toString() {
 		if(getColor() == Color.WHITE)
 			return "B";
 		else
 			return "b";
+	}
+
+	@Override
+	public Piece clone(Board b) {
+		return new Bishop(this.getColor(), b);
 	}
 
 }
