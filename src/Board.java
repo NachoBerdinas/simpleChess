@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Board{
+public class Board implements Serializable{
 
   private Piece[][] board;
   private List<Piece> capturedWhitePieces;
