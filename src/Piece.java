@@ -33,9 +33,17 @@ public abstract class Piece implements Serializable {
 	public abstract String toString();
 
 	public boolean validMove(Vector loc) {
+		System.out.println(" Getting possible moves ");
+		List<Vector> moves = getPossibleMoves();
+		System.out.println(" Finish getting possible moves ");
+
+
+		moves.stream().forEach(System.out::println);
+
+		Vector initLoc = position;
+
 		Board testBoard = new Board(board);
 		Piece testPiece = testBoard.get(position);
-		Vector initLoc = position;
 		testBoard.put(initLoc,null);
 		testBoard.put(loc, testPiece);
 
@@ -43,7 +51,7 @@ public abstract class Piece implements Serializable {
 			System.out.println("This move puts " + color.toString().toLowerCase() + " in check, so");
 			return false;
 		}
-		return getPossibleMoves().contains(loc);
+		return moves.contains(loc);
 	}
 
 	public void moveTo(Vector loc) {

@@ -15,6 +15,10 @@ public class Board{
   public Board(Board b) {
     board = new Piece[8][8];
     whosTurn = b.whosTurn;
+    capturedWhitePieces = new ArrayList<Piece>();
+    capturedBlackPieces = new ArrayList<Piece>();
+    whitePieces = new ArrayList<Piece>();
+    blackPieces = new ArrayList<Piece>();
     for(int r = 0; r < 8; r++) {
       for(int c = 0; c < 8; c++) {
         if(b.board[r][c] instanceof Pawn)
@@ -49,7 +53,6 @@ public class Board{
       whitePieces = new ArrayList<Piece>();
       blackPieces = new ArrayList<Piece>();
       generatePieces();
-
   }
 
   public Color whosTurn() { return whosTurn; }
@@ -161,8 +164,9 @@ public class Board{
       throw new IllegalArgumentException(whosTurn + " has no piece at that position");
 
     Piece piece = get(ret[0]);
-    if(!piece.validMove(ret[1]))
+    if(!piece.validMove(ret[1])) {
       throw new IllegalArgumentException(rawStr + " is an illegal move");
+    }
     return ret;
   }
 
@@ -203,11 +207,11 @@ public class Board{
   public boolean isInCheck(Color color) {
     Color oppColor = (color == Color.WHITE) ? Color.BLACK : Color.WHITE;
     List<Piece> oppPieces = getPiecesOfColor(oppColor);
-
+    Piece oppKing = color.equals(Color.WHITE)? whiteKing:blackKing;
     Vector kingLoc = color.equals(Color.WHITE)? whiteKing.getLoc():blackKing.getLoc();
 
     for(Piece p : oppPieces) {
-      if(!(p instanceof King)) {
+      if(!(p.equals(oppKing))){
         List<Vector> moves = p.getPossibleMoves();
         for(Vector moveLoc : moves) {
           if(moveLoc.equals(kingLoc))
