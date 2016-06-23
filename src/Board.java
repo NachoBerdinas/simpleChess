@@ -13,18 +13,20 @@ public class Board{
   private Color whosTurn;
 
   public Board(Board b) {
-    board = new Piece[8][8];
-    whosTurn = b.whosTurn;
-    capturedWhitePieces = new ArrayList<Piece>();
-    capturedBlackPieces = new ArrayList<Piece>();
-    whitePieces = new ArrayList<Piece>();
-    blackPieces = new ArrayList<Piece>();
-    for(int r = 0; r < 8; r++) {
-      for(int c = 0; c < 8; c++) {
-        if(b.board[r][c] !=null)
-          add(b.board[r][c].clone(this));
+      board = new Piece[8][8];
+      whosTurn = b.whosTurn;
+      capturedWhitePieces = new ArrayList<Piece>();
+      capturedBlackPieces = new ArrayList<Piece>();
+      whitePieces = new ArrayList<Piece>();
+      blackPieces = new ArrayList<Piece>();
+      for(int x = 0; x < 8; x++) {
+          for(int y = 0; y < 8; y++) {
+              if(b.board[x][y] !=null) {
+                  add(b.board[x][y].clone(this));
+              }
+          }
       }
-    }
+      printBoard();
   }
   
   public Board() { 
@@ -82,10 +84,13 @@ public class Board{
 
   
   public void addCaptured(Piece p) {
-    if(p.getColor().equals(Color.WHITE))
+    if(p.getColor().equals(Color.WHITE)) {
         capturedWhitePieces.add(p);
-    else
+        whitePieces.remove(p);
+    }else {
         capturedBlackPieces.add(p);
+        blackPieces.remove(p);
+    }
   }
   
   public Piece get(Vector loc) {
@@ -106,8 +111,9 @@ public class Board{
       throw new IllegalArgumentException("Invalid location");
     Piece old = this.get(loc);
     this.board[loc.getY()][loc.getX()] = p;
-    if(p != null)
-      p.setLoc(loc);
+    if(p != null) {
+        p.setLoc(loc);
+    }
     return old;
   }
 
@@ -126,11 +132,11 @@ public class Board{
   }
 
   public List<Vector> getVectorPiecesOfColor(Color col) {
-    List<Vector> ret = new ArrayList<>();
-    for (Piece p: col.equals(Color.WHITE)?whitePieces:blackPieces){
-      ret.add(p.getLoc());
-    }
-    return ret;
+      List<Vector> ret = new ArrayList<>();
+      for (Piece p: col.equals(Color.WHITE)?whitePieces:blackPieces){
+          ret.add(p.getLoc());
+      }
+      return ret;
   }
 
 
@@ -187,21 +193,18 @@ public class Board{
   }
   
   public boolean isInCheck(Color color) {
-    Color oppColor = (color == Color.WHITE) ? Color.BLACK : Color.WHITE;
-    List<Piece> oppPieces = getPiecesOfColor(oppColor);
-    Piece oppKing = color.equals(Color.WHITE)? whiteKing:blackKing;
-    Vector kingLoc = color.equals(Color.WHITE)? whiteKing.getLoc():blackKing.getLoc();
+      Color oppColor = (color == Color.WHITE) ? Color.BLACK : Color.WHITE;;
+      Piece king = (color == Color.WHITE) ? blackKing: whiteKing;
+      List<Piece> oppPieces = getPiecesOfColor(oppColor);
 
-    for(Piece p : oppPieces) {
-      if(!(p.equals(oppKing))){
-        List<Vector> moves = p.getPossibleMoves();
-        for(Vector moveLoc : moves) {
-          if(moveLoc.equals(kingLoc))
-            return true;
-        }
+      for(Piece p : oppPieces) {
+          for(Vector v: p.getPossibleMoves()){
+              if(v.equals(king.getLoc())){
+                  return true;
+              }
+          }
       }
-    }
-    return false;
+      return false;
   }
 
   
@@ -218,18 +221,18 @@ public class Board{
 
         move = null;
         do {
-          board.printBoard();
-          System.out.println(board.whosTurn() + " to move:");
-          String rawMove = kb.nextLine();
-          try {
-            move = board.parseMove(rawMove, board.whosTurn());
-          } catch(NumberFormatException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Please try again using notation \"e2 to e4\"");
-          } catch(IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Please try again with a legal move");
-          }
+            board.printBoard();
+            System.out.println(board.whosTurn() + " to move:");
+            String rawMove = kb.nextLine();
+            try {
+                move = board.parseMove(rawMove, board.whosTurn());
+            }catch(NumberFormatException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Please try again using notation \"e2 to e4\"");
+            }catch(IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Please try again with a legal move");
+            }
         } while(move == null);
 
         Piece piece = board.get(move[0]);

@@ -3,7 +3,6 @@ import java.util.*;
 
 public abstract class Piece implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 	private Color color;
 	private Vector position;
 	private Board board;
@@ -34,18 +33,15 @@ public abstract class Piece implements Serializable {
 
 	public boolean validMove(Vector loc) {
 		List<Vector> moves = getPossibleMoves();
-
-		Vector initLoc = position;
 		Board testBoard = new Board(board);
-		Piece testPiece = testBoard.get(position);
-		testBoard.put(initLoc,null);
-		testBoard.put(loc, testPiece);
+
+		testBoard.put(position,null);
+		testBoard.put(loc, testBoard.get(position));
 
 		if(testBoard.isInCheck(color)) {
 			System.out.println("This move puts " + color.toString().toLowerCase() + " in check, so");
 			return false;
 		}
-		System.out.println("Contains?? "+loc);
 		return moves.contains(loc);
 	}
 

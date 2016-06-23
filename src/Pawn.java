@@ -30,8 +30,6 @@ public class Pawn extends Piece {
 		if(b.isValid(attRight) && !b.isVacant(attRight) && b.get(attRight).getColor() != getColor()) {
 			ret.add(attRight);
 		}
-		System.out.println("Returning possible moves "+ret.size());
-
 		return ret;
 	}
 
