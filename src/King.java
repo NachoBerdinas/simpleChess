@@ -26,12 +26,14 @@ public class King extends Piece {
 
 	@Override
 	public Piece clone(Board b) {
+		King aux = this;
 		if (getColor() == Color.WHITE) {
-			b.setWhiteKing(this);
-		} else {
-			b.setBlackKing(this);
+			b.setWhiteKing(aux);
 		}
-		return new King(this.getColor(),b);
+		else {
+			b.setBlackKing(aux);
+		}
+		return new King(aux.getColor(),b);
 	}
 
 	public String toString() { 
