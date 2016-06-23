@@ -42,47 +42,14 @@ public class Board{
   }
   
   public Board() { 
-    board = new Piece[8][8];
-    whosTurn = Color.WHITE;
-    capturedWhitePieces = new ArrayList<Piece>();
-    capturedBlackPieces = new ArrayList<Piece>();
-    whitePieces = new ArrayList<Piece>();
-    blackPieces = new ArrayList<Piece>();
+      board = new Piece[8][8];
+      whosTurn = Color.WHITE;
+      capturedWhitePieces = new ArrayList<Piece>();
+      capturedBlackPieces = new ArrayList<Piece>();
+      whitePieces = new ArrayList<Piece>();
+      blackPieces = new ArrayList<Piece>();
+      generatePieces();
 
-
-    for(int c = 0; c < 8; c++) {
-      whitePieces.add(new Pawn(Color.BLACK, this).setLoc(new Vector(1,c)));
-      whitePieces.add(new Pawn(Color.WHITE, this).setLoc(new Vector(6,c)));
-    }
-    whiteKing = new King(Color.WHITE, this).setLoc(new Vector(7,4));
-    blackKing = new King(Color.BLACK, this).setLoc(new Vector(0,4));
-
-    whitePieces.add(whiteKing);
-    blackPieces.add(blackKing);
-
-    blackPieces.add(new Rook(Color.BLACK, this).setLoc(new Vector(0,0)));
-    blackPieces.add(new Rook(Color.BLACK, this).setLoc(new Vector(0,7)));
-    blackPieces.add(new Knight(Color.BLACK, this).setLoc(new Vector(0,1)));
-    blackPieces.add(new Knight(Color.BLACK, this).setLoc(new Vector(0,6)));
-    blackPieces.add(new Bishop(Color.BLACK, this).setLoc(new Vector(0,2)));
-    blackPieces.add(new Bishop(Color.BLACK, this).setLoc(new Vector(0,5)));
-    blackPieces.add(new Queen(Color.BLACK, this).setLoc(new Vector(0,3)));
-
-    whitePieces.add(new Rook(Color.WHITE, this).setLoc(new Vector(7,0)));
-    whitePieces.add(new Rook(Color.WHITE, this).setLoc(new Vector(7,7)));
-    whitePieces.add(new Knight(Color.WHITE, this).setLoc(new Vector(7,1)));
-    whitePieces.add(new Knight(Color.WHITE, this).setLoc(new Vector(7,6)));
-    whitePieces.add(new Bishop(Color.WHITE, this).setLoc(new Vector(7,2)));
-    whitePieces.add(new Bishop(Color.WHITE, this).setLoc(new Vector(7,5)));
-    whitePieces.add(new Queen(Color.WHITE, this).setLoc(new Vector(7,3)));
-
-    for(Piece p: whitePieces){
-      add(p);
-    }
-
-    for(Piece p: blackPieces){
-      add(p);
-    }
   }
 
   public Color whosTurn() { return whosTurn; }
@@ -91,9 +58,42 @@ public class Board{
     whosTurn = whosTurn == Color.WHITE ? Color.BLACK : Color.WHITE;
   }
   
-  public void add(Piece p) {
-    board[p.getLoc().getY()][p.getLoc().getX()] = p;
+  private void add(Piece p) {
+      if (p.getColor() == Color.BLACK) {
+          blackPieces.add(p);
+      }
+      else whitePieces.add(p);
+      board[p.getLoc().getY()][p.getLoc().getX()] = p;
   }
+
+    private void generatePieces() {
+        //Generate Pawns
+        for(int c = 0; c < 8; c++) {
+            add(new Pawn(Color.BLACK, this).setLoc(new Vector(1,c)));
+            add(new Pawn(Color.WHITE, this).setLoc(new Vector(6,c)));
+        }
+        //Add Kings
+        whiteKing = new King(Color.WHITE, this).setLoc(new Vector(7,4));
+        blackKing = new King(Color.BLACK, this).setLoc(new Vector(0,4));
+        add(whiteKing);
+        add(blackKing);
+        //Add rest of superior pieces
+        add(new Rook(Color.BLACK, this).setLoc(new Vector(0,0)));
+        add(new Rook(Color.BLACK, this).setLoc(new Vector(0,7)));
+        add(new Knight(Color.BLACK, this).setLoc(new Vector(0,1)));
+        add(new Knight(Color.BLACK, this).setLoc(new Vector(0,6)));
+        add(new Bishop(Color.BLACK, this).setLoc(new Vector(0,2)));
+        add(new Bishop(Color.BLACK, this).setLoc(new Vector(0,5)));
+        add(new Queen(Color.BLACK, this).setLoc(new Vector(0,3)));
+
+        add(new Rook(Color.WHITE, this).setLoc(new Vector(7,0)));
+        add(new Rook(Color.WHITE, this).setLoc(new Vector(7,7)));
+        add(new Knight(Color.WHITE, this).setLoc(new Vector(7,1)));
+        add(new Knight(Color.WHITE, this).setLoc(new Vector(7,6)));
+        add(new Bishop(Color.WHITE, this).setLoc(new Vector(7,2)));
+        add(new Bishop(Color.WHITE, this).setLoc(new Vector(7,5)));
+        add(new Queen(Color.WHITE, this).setLoc(new Vector(7,3)));
+    }
 
   
   public void addCaptured(Piece p) {

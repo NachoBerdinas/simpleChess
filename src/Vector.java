@@ -19,8 +19,7 @@ public class Vector {
 
 		Vector vector = (Vector) o;
 
-		if (x != vector.x) return false;
-		return y == vector.y;
+		return x == vector.x && y == vector.y;
 
 	}
 
