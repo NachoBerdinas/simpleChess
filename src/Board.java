@@ -221,7 +221,22 @@ public class Board{
         do {
             board.printBoard();
             System.out.println(board.whosTurn() + " to move:");
+            System.out.println("You can type save or open at anytime to save/recover game file");
             String rawMove = kb.nextLine();
+            if (rawMove.equals("save")) {
+                FileOutputStream exit = new FileOutputStream("ChessData");
+                ObjectOutputStream obj = new ObjectOutputStream(exit);
+                obj.writeObject(board);
+                obj.close();
+                System.out.println("Game saved succesfully");
+            }
+            if (rawMove.equals("open")) {
+                FileInputStream recover = new FileInputStream("ChessData");
+                ObjectInputStream p = new ObjectInputStream(recover);
+                board = (Board) p.readObject();
+                p.close();
+                System.out.println("Game succesfully recovered");
+            }
             try {
                 move = board.parseMove(rawMove, board.whosTurn());
             }catch(NumberFormatException e) {
